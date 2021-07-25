@@ -189,6 +189,10 @@ let api = function Binance( options = {} ) {
     }
 
     const proxyRequest = ( opt, cb ) => {
+        //cuongnp
+        if (Binance.options.isWeb) {
+            opt.url = `http://${Binance.options.webProxy}/${opt.url}`;
+        }
         const req = request( addProxy( opt ), reqHandler( cb ) ).on('error', (err) => { cb( err, {} ) });
         return req;
     }
